@@ -1,5 +1,20 @@
 <p>requirement-entry works!</p>
-<table class="table">
+<!-- <h2>{{'requirement-entry works!' | titlecase }}</h2> -->
+
+debug: {{ searchBox.value }}
+
+<hr />
+<!-- Binding input -->
+<input [formControl]="searchBox" placeholder="search" type="text" />
+<hr />
+
+<input type="checkbox" [(ngModel)]="isSmallTable" id="isSmallTable" />
+
+<label for="isSmallTable"> show/ Hide Small Table</label>
+
+<button routerLink="add">Add</button>
+
+<table class="table" [class.table-sm]="isSmallTable">
   <thead>
     <tr>
       <th>Id</th>
@@ -8,8 +23,9 @@
     </tr>
   </thead>
   <tbody>
-    @for (req of reqs; track req.id) {
+    @for (req of filtered ; track req.id) {
     <tr>
+      <td routerLink="edit/{{ req.id }}"><i class="bi bi-pencil"></i></td>
       <td>{{ req.id }}</td>
       <td>{{ req.title }}</td>
       <td>{{ req.contactMobileNo | mobileFormat }}</td>
